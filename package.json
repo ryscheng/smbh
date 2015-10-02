@@ -1,0 +1,27 @@
+{
+  "name": "smbh",
+  "description": "Super Massive Black Holes",
+  "version": "0.0.1",
+  "homepage": "",
+  "bugs": {
+    "url": "http://github.com/ryscheng/smbh/issues",
+    "email": "me@raymondcheng.net"
+  },
+  "contributors": [
+    "Raymond Cheng <me@raymondcheng.net> (https://raymondcheng.net)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryscheng/smbh"
+  },
+  "main": "src/main.go",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "go run src/main.go",
+    "test": "echo poop",
+    "prepublish": "echo poop"
+  },
+  "devDependencies": {
+    "semantic-ui": "^2.1.4"
+  }
+}
