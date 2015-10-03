@@ -22,6 +22,8 @@
     "prepublish": "echo poop"
   },
   "devDependencies": {
-    "semantic-ui": "^2.1.4"
+    "babel-core": "^5.8.25",
+    "react": "^0.13.3",
+    "semantic-ui-css": "^2.1.4"
   }
 }
