@@ -22,8 +22,11 @@
     "prepublish": "echo poop"
   },
   "devDependencies": {
-    "babel-core": "^5.8.25",
-    "react": "^0.13.3",
-    "semantic-ui-css": "^2.1.4"
+    "babel-eslint": "^4.1.3",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.0.0",
+    "material-ui": "^0.12.1",
+    "react": "^0.13.3"
   }
 }

@@ -2,7 +2,7 @@
 
 ### Dependencies
 node_modules/
-static/thirdparty/
+static/build/
 
 ### Scrap
 .*.swp
