@@ -1,8 +1,10 @@
 
+### Build
+build/
+static/build/
 
 ### Dependencies
 node_modules/
-static/build/
 
 ### Scrap
 .*.swp
