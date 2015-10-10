@@ -1,6 +1,7 @@
 var path = require("path");
 var gulp = require("gulp");
 var babel = require("gulp-babel");
+var babelify = require("babelify");
 var eslint = require('gulp-eslint');
 //var concat = require("gulp-concat");
 var browserify = require("browserify");
@@ -8,6 +9,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
+var fs = require("fs-extra");
 
 gulp.task("babel", function() {
   return gulp.src("src/**/*.js")
@@ -15,25 +17,27 @@ gulp.task("babel", function() {
     .pipe(gulp.dest("build/babel/"));
 });
 
-gulp.task("browserify", [ "babel" ], function() {
-  var entry = "./build/babel/client/main.js";
+gulp.task("browserify", function() {
+  var entry = "./src/client/main.js";
+  var dest = "./static/build/";
   var filename = path.basename(entry);
-  var bundler = browserify({
+  var bundle = browserify({
     entries: [ entry ],
     debug: true
-  });
-  var bundle = function() {
-    return bundler
-      .bundle()
-      .pipe(source(filename))
-      .pipe(buffer())
-      //.pipe(sourcemaps.init({ loadMaps: true }))
-      // Add transformation tasks to the pipeline here.
-      //.pipe(uglify())
-      //.pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./static/build/'));
-  };
-  return bundle();
+  }).transform(babelify)
+    .bundle()
+    .pipe(source(filename))
+    .pipe(buffer());
+  if (process.env.NODE_ENV === "production") {
+    return bundle
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      // --- Add transformation tasks to the pipeline here.
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(dest));
+  } else {
+    return bundle.pipe(gulp.dest(dest));
+  }
 });
 
 gulp.task("lint", function() {
@@ -42,6 +46,16 @@ gulp.task("lint", function() {
     .pipe(eslint.format())
     .pipe(eslint.failOnError());
 });
+
+//@todo
+gulp.task("clean", function() {
+  fs.removeSync("build/");
+  fs.removeSync("static/build/");
+});
+
+gulp.task("watch", function() {
+  gulp.watch("src/client/**/*.js", [ "build" ]);
+})
 
 gulp.task("build", [ "browserify" ]);
 gulp.task("test", [ "lint" ]);
