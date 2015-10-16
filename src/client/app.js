@@ -1,10 +1,9 @@
 import React from "react";
 import { Link, History } from "react-router";
-import LeftNav from "material-ui/lib/left-nav";
-import AppCanvas from "material-ui/lib/app-canvas";
-import AppBar from "material-ui/lib/app-bar";
-import IconButton from "material-ui/lib/icon-button";
-import MenuButton from "material-ui/lib/svg-icons/navigation/menu";
+import { 
+  LeftNav, AppCanvas, AppBar,
+  IconButton, Icons
+} from "material-ui";
 
 const menuItems = [
   { route: "/home", text: "Home" },
@@ -32,11 +31,11 @@ export const App = React.createClass({
         <AppBar
           ref="appbar"
           title={this.state.title}
-          iconElementLeft={<IconButton onClick={this._toggleLeftNav}><MenuButton /></IconButton>}
+          iconElementLeft={<IconButton onClick={this._toggleLeftNav}><Icons.NavigationMenu /></IconButton>}
           onLeftIconButtonTouchTap={this._toggleLeftNav} />
         <LeftNav ref="leftNav" 
           docked={false} 
-          header={<IconButton onClick={this._toggleLeftNav}><MenuButton /></IconButton>}
+          header={<IconButton onClick={this._toggleLeftNav}><Icons.NavigationMenu /></IconButton>}
           onChange={this._onLeftNavChange}
           menuItems={menuItems} />
         <div id="app-page">

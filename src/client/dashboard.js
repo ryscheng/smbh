@@ -5,7 +5,6 @@ export const Dashboard = React.createClass({
   render() {
     return (
       <div>
-        <h1>Dashboard</h1>
         <RaisedButton label="PUSH ME"/>
       </div>
     );
