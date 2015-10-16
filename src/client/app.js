@@ -11,15 +11,27 @@ const menuItems = [
   { route: "/dashboard", text: "Dashboard" },
   { route: "/settings", text: "Settings" },
 ];
+var menuMap = {};
 
 export const App = React.createClass({
   mixins: [ History ],
+  _menuMap: {},
+
+  getInitialState() {
+    menuItems.forEach((elt) => {
+      this._menuMap[elt.route] = elt.text; 
+    });
+    // Default title
+    this._menuMap["/"] = "SMBH"
+    return { title: this._menuMap[this.props.location.pathname] };
+  },
 
   render() {
     return (
       <AppCanvas>
         <AppBar
-          title="SMBH"
+          ref="appbar"
+          title={this.state.title}
           iconElementLeft={<IconButton onClick={this._toggleLeftNav}><MenuButton /></IconButton>}
           onLeftIconButtonTouchTap={this._toggleLeftNav} />
         <LeftNav ref="leftNav" 
@@ -27,7 +39,9 @@ export const App = React.createClass({
           header={<IconButton onClick={this._toggleLeftNav}><MenuButton /></IconButton>}
           onChange={this._onLeftNavChange}
           menuItems={menuItems} />
-        {this.props.children}
+        <div id="app-page">
+          {this.props.children}
+        </div>
       </AppCanvas>
     );
   },
@@ -40,6 +54,7 @@ export const App = React.createClass({
   _onLeftNavChange(e, key, payload) {
     e.preventDefault();
     this.history.pushState(null, payload.route);
+    this.setState({ title: this._menuMap[payload.route] });
   },
 });
 

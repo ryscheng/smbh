@@ -17,3 +17,7 @@
   src: local('Roboto Medium'), local('Roboto-Medium'), url(./roboto-500.woff2) format('woff2');
 }
 
+#app-page {
+  padding-top: 50px;
+  padding-left: 10px;
+}

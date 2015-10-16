@@ -11,7 +11,7 @@ InjectTapEventPlugin();
 
 ReactDOM.render((
   <Router>
-    <Route path="/" component={App}>
+    <Route path="/" component={App} >
       <IndexRoute component={Home} />
       <Route path="home" component={Home} />
       <Route path="dashboard" component={Dashboard} />
